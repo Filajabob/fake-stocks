@@ -1,3 +1,5 @@
+var previousValue = 500; // Arbitrary number
+
 const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
@@ -25,12 +27,28 @@ function request(url, method="GET") {
 
 $(document).ready(async function update() {
     while (true) {
-        $.getJSON(url, function(result) {
+        $.getJSON(url, async function(result) {
+            valueDisplay.classList.remove("valUp");
+            valueDisplay.classList.remove("valDown");
+            await timer(200);
             valueDisplay.innerText = result["tradingValue"];
+
+            if (result["tradingValue"] < previousValue) {
+                // Value goes down
+                valueDisplay.classList.add("valDown")
+            } else if (result["tradingValue"] > previousValue) {
+                // Value goes up
+                valueDisplay.classList.add("valUp")
+            }
+
+            
+
+            previousValue = result["tradingValue"]
+
             document.title = ticker + " - " + result["tradingValue"]
         })
         
 
-        await timer(1000);
+        await timer(1300);
     }
 })

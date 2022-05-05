@@ -1,0 +1,33 @@
+@-o-keyframes fadeGreen {
+    0%   { background-color: #FFFFFF; }
+    10%  { background-color: #15ff00; }
+    100% { background-color: #FFFFFF; }
+  }
+@keyframes fadeGreen {
+    0%   { background-color: #FFFFFF; }
+    10%  { background-color: #67ff59; }
+    100% { background-color: #FFFFFF; }
+}
+
+@-o-keyframes fadeRed {
+    0%   { background-color: #FFFFFF; }
+    10%  { background-color: #fe3636; }
+    100% { background-color: #FFFFFF; }
+  }
+@keyframes fadeRed {
+    0%   { background-color: #FFFFFF; }
+    10%  { background-color: #fe3636; }
+    100% { background-color: #FFFFFF; }
+}
+  
+.valUp{    
+    background-image:none !important; 
+        -o-animation: fadeGreen 1s ease-in-out; 
+            animation: fadeGreen 1s ease-in-out; 
+}
+
+.valDown{    
+    background-image:none !important; 
+         -o-animation: fadeRed 1s ease-in-out; 
+            animation: fadeRed 1s ease-in-out; 
+}
