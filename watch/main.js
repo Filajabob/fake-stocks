@@ -5,13 +5,18 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
   });
 
 const ticker = params.ticker;
-let valueDisplay = document.getElementById("value-display");
+var valueDisplay = document.getElementById("value-display");
 
 const timer = ms => new Promise(res => setTimeout(res, ms))
 const url = "https://FakeStockGenerator.filajabob123.repl.co/ticker/" + ticker;
 
+var tradingVal;
+
+console.log("mehfsdvh")
+
 $(document).ready(async function update() {
     while (true) {
+        // Update trading value
         $.getJSON(url, async function(result) {
             valueDisplay.classList.remove("valUp");
             valueDisplay.classList.remove("valDown");
@@ -28,12 +33,26 @@ $(document).ready(async function update() {
 
             
 
-            previousValue = result["tradingValue"]
+            previousValue = result["tradingValue"];
+            tradingVal = previousValue;
 
-            document.title = ticker + " - " + result["tradingValue"]
-        })
+            document.title = ticker + " - " + result["tradingValue"];
+
+           
+        });
         
+        $.getJSON("https://rosestockmarket.filajabob123.repl.co/close/" + ticker, async function(result) {
+            var numericalChangeEl = document.getElementById("numerical-change");
+            var percentageChangeEl = document.getElementById("percentage-change");
 
-        await timer(1300);
+            var numericalChange = result["closingVal"] - tradingVal;
+
+            numericalChangeEl.innerText = numericalChange;
+            console.log(numericalChange)
+            await timer(1300);
+        });
+
+        console.log("hi")
+        
     }
-})
+});
