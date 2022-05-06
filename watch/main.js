@@ -49,6 +49,7 @@ $(document).ready(async function update() {
 
             numericalChangeEl.innerText = numericalChange;
             console.log(numericalChange)
+            // fughjf
             await timer(1300);
         });
 
