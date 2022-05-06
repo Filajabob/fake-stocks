@@ -13,49 +13,75 @@ const timer = ms => new Promise(res => setTimeout(res, ms))
 const url = "https://FakeStockGenerator.filajabob123.repl.co/ticker/" + ticker;
 
 var tradingVal;
+var numericalChange;
+var percentageChange;
+
+var prevNumChange;
+var prevPerChange;
+
+
 
 console.log("mehfsdvh")
 
-$(document).ready(async function update() {
+async function updateVals() {
+    var valueDisplay = document.getElementById("value-display");
+    var numericalChangeEl = document.getElementById("numerical-change")
+    var percentageChangeEl = document.getElementById("percentage-change")
+
+    // Update trading value
+    $.getJSON(url, async function(result) {
+        valueDisplay.classList.remove("valUp");
+        valueDisplay.classList.remove("valDown");
+
+        numericalChangeEl.classList.remove("valUp");
+        numericalChangeEl.classList.remove("valDown");
+
+        await timer(200);
+
+        numericalChange = -(parseFloat(result["closingVal"]) - parseFloat(result["tradingValue"])).toFixed(2);
+        percentageChange = (Math.abs(result["closingVal"] - result["tradingValue"]) / result["closingVal"] * 100).toFixed(2);
+
+        valueDisplay.innerText = result["tradingValue"].toFixed(2);
+
+        if (result["tradingValue"] < previousValue) {
+            // Value goes down
+            valueDisplay.classList.add("valDown")
+        } else if (result["tradingValue"] > previousValue) {
+            // Value goes up
+            valueDisplay.classList.add("valUp")
+        }
+
+        // Display numerical change
+        if (numericalChange < 0) {
+            numericalChangeEl.innerText = numericalChange
+            numericalChangeEl.style.color = "red"
+        } else {
+            numericalChangeEl.innerText = '+' + numericalChange
+            numericalChangeEl.style.color = "rgb(0, 255, 47)"
+        }
+
+        // Display percentage change
+        if (numericalChange < 0) {
+            percentageChangeEl.innerText = "-" + percentageChange + '%';
+            percentageChangeEl.style.color = "red"
+        } else {
+            percentageChangeEl.innerText = '+' + percentageChange + '%'
+            percentageChangeEl.style.color = "rgb(0, 255, 47)"
+        }
+
+        prevNumChange = numericalChange
+        prevPerChange = percentageChange
+
+        previousValue = result["tradingValue"];
+        tradingVal = previousValue;
+
+        document.title = ticker + " - " + result["tradingValue"]
+    });
+}
+
+$(document).ready(async function() {
     while (true) {
-        // Update trading value
-        $.getJSON(url, async function(result) {
-            valueDisplay.classList.remove("valUp");
-            valueDisplay.classList.remove("valDown");
-            await timer(200);
-            valueDisplay.innerText = result["tradingValue"];
-
-            if (result["tradingValue"] < previousValue) {
-                // Value goes down
-                valueDisplay.classList.add("valDown")
-            } else if (result["tradingValue"] > previousValue) {
-                // Value goes up
-                valueDisplay.classList.add("valUp")
-            }
-
-            
-
-            previousValue = result["tradingValue"];
-            tradingVal = previousValue;
-
-            document.title = ticker + " - " + result["tradingValue"];
-
-           
-        });
-        
-        $.getJSON("https://FakeStockGenerator.filajabob123.repl.co/closing/" + ticker, async function(result) {
-            var numericalChangeEl = document.getElementById("numerical-change");
-            var percentageChangeEl = document.getElementById("percentage-change");
-
-            var numericalChange = result["closingVal"] - tradingVal;
-
-            numericalChangeEl.innerText = numericalChange;
-            console.log(numericalChange)
-            // fughjfl
-            await timer(1300);
-        });
-
-        console.log("hi")
-        
+        await timer(1300);
+        updateVals();
     }
 });

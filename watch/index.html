@@ -15,15 +15,20 @@
     <link href="https://cdn.anychart.com/releases/8.11.0/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
     <link href="https://cdn.anychart.com/releases/8.11.0/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet"> -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+    
     <link rel="stylesheet" href="styles.css">
     
     <title>Loading Ticker Value...</title>
 </head>
 <body>
-    <h1><span id="value-display"></span></h1>
-    <h2><span id="numerical-change"></span></h2>
-    <h2><span id="percentage-change"></span></h2>
-    <div id="stock-chart"></div>
+    <h1>Stock Track</h1>
+    <div id="stock-data">
+        <h1><span id="value-display" class="values"></span></h1>
+        <h2><span id="numerical-change" class="values"></span></h2>
+        <h2><span id="percentage-change" class="values"></span></h2>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="main.js"></script>
