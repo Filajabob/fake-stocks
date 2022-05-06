@@ -1,3 +1,5 @@
+console.log("HELLLO")
+
 var previousValue = 500; // Arbitrary number
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -41,7 +43,7 @@ $(document).ready(async function update() {
            
         });
         
-        $.getJSON("https://FakeStockGenerator.filajabob123.repl.co/close/" + ticker, async function(result) {
+        $.getJSON("https://FakeStockGenerator.filajabob123.repl.co/closing/" + ticker, async function(result) {
             var numericalChangeEl = document.getElementById("numerical-change");
             var percentageChangeEl = document.getElementById("percentage-change");
 
