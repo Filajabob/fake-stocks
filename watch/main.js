@@ -41,7 +41,7 @@ $(document).ready(async function update() {
            
         });
         
-        $.getJSON("https://rosestockmarket.filajabob123.repl.co/close/" + ticker, async function(result) {
+        $.getJSON("https://FakeStockGenerator.filajabob123.repl.co/close/" + ticker, async function(result) {
             var numericalChangeEl = document.getElementById("numerical-change");
             var percentageChangeEl = document.getElementById("percentage-change");
 
@@ -49,7 +49,7 @@ $(document).ready(async function update() {
 
             numericalChangeEl.innerText = numericalChange;
             console.log(numericalChange)
-            // fughjf
+            // fughjfl
             await timer(1300);
         });
 
