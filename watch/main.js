@@ -19,10 +19,6 @@ var percentageChange;
 var prevNumChange;
 var prevPerChange;
 
-
-
-console.log("mehfsdvh")
-
 async function updateVals() {
     var valueDisplay = document.getElementById("value-display");
     var numericalChangeEl = document.getElementById("numerical-change")
@@ -30,6 +26,12 @@ async function updateVals() {
 
     // Update trading value
     $.getJSON(url, async function(result) {
+        if (!result["open"]) {
+            document.getElementById("open-status").textContent = "Market closed."
+        } else {
+            document.getElementById("open-status").textContent = "Market open."
+        }
+
         valueDisplay.classList.remove("valUp");
         valueDisplay.classList.remove("valDown");
 
@@ -57,16 +59,16 @@ async function updateVals() {
             numericalChangeEl.style.color = "red"
         } else {
             numericalChangeEl.innerText = '+' + numericalChange
-            numericalChangeEl.style.color = "rgb(0, 255, 47)"
+            numericalChangeEl.style.color = "rgb(22, 219, 4)"
         }
 
         // Display percentage change
         if (numericalChange < 0) {
-            percentageChangeEl.innerText = "-" + percentageChange + '%';
-            percentageChangeEl.style.color = "red"
+            percentageChangeEl.innerText = "(-" + percentageChange + '%)';
+            percentageChangeEl.style.color = "red";
         } else {
-            percentageChangeEl.innerText = '+' + percentageChange + '%'
-            percentageChangeEl.style.color = "rgb(0, 255, 47)"
+            percentageChangeEl.innerText = '(+' + percentageChange + '%)';
+            percentageChangeEl.style.color = "rgb(22, 219, 4)";
         }
 
         prevNumChange = numericalChange
@@ -80,6 +82,12 @@ async function updateVals() {
 }
 
 $(document).ready(async function() {
+    $.getJSON("https://FakeStockGenerator.filajabob123.repl.co/ticker/" + ticker, function(res) {
+        document.getElementById("page-header").innerText = res["name"]
+    })
+
+    
+
     while (true) {
         await timer(1300);
         updateVals();

@@ -23,11 +23,14 @@
     <title>Loading Ticker Value...</title>
 </head>
 <body>
-    <h1>Stock Track</h1>
+    <h1 id="page-header">Stock Track</h1>
     <div id="stock-data">
-        <h1><span id="value-display" class="values"></span></h1>
-        <h2><span id="numerical-change" class="values"></span></h2>
-        <h2><span id="percentage-change" class="values"></span></h2>
+        <h1>
+            <span id="value-display"></span>   
+            <span id="numerical-change" class="changes"></span>   
+            <span id="percentage-change" class="changes"></span>
+        </h1>
+        <p id="open-status"></p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
