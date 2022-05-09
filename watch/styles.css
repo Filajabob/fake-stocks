@@ -49,7 +49,15 @@ body {
     font-size: 1.25em;
 }
 
+#at-close {
+    font-size: 1.25em;
+}
+
 #open-status {
+    color: gray;
+}
+
+#at-close-context {
     color: gray;
 }
 
