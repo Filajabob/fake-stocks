@@ -63,7 +63,7 @@ async function updateVals() {
             // Display numerical change
             if (closeNumericalChange < 0) {
                 closeNumChangeEl.innerText = closeNumericalChange
-                closeNumlChangeEl.style.color = "red"
+                closeNumChangeEl.style.color = "red"
             } else {
                 closeNumChangeEl.innerText = '+' + closeNumericalChange
                 closeNumChangeEl.style.color = "rgb(22, 219, 4)"
@@ -77,6 +77,11 @@ async function updateVals() {
                 closePerChangeEl.innerText = '(+' + closePercentageChange + '%)';
                 closePerChangeEl.style.color = "rgb(22, 219, 4)";
             }
+        } else {
+            closeNumChangeEl.innerText = "";
+            closePerChangeEl.innerText = "";
+            document.getElementById("at-close").textContent = "";
+            document.getElementById("at-close-context").textContent = "";
         }
 
         if (result["tradingValue"] < previousValue) {
